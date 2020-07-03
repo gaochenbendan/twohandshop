@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>首页 - 橙子(Orange)后台管理系统</title>
+<link rel="icon" type="image/ico">
+  <link rel="icon" href="/admin/images/tubiao.png" type="image/ico">
+<meta name="keywords" content="橘子-后台管理系统项目">
+<meta name="description" content="橘子-后台管理系统项目">
+<meta name="author" content="orange">
+<link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="/admin/css/style.min.css" rel="stylesheet">
+</head>
+  
+<body data-theme="dark">
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <!--左侧导航-->
+    <aside class="lyear-layout-sidebar">
+      <!-- logo -->
+      <div id="logo" class="sidebar-header">
+<!--        <a href="/system/index"><img src="/admin/images/orange.png" title="${sitename}" alt="${sitename}" /></a>-->
+        <a class="navbar-brand  " href="/system/index">橙子-后台管理</a>
+      </div>
+      <div class="lyear-layout-sidebar-scroll">
+
+        <#include "../common/leftMenu.html">
+        
+        <div class="sidebar-footer">
+          <p class="copyright">orange © 2020</p>
+          <p class="copyright">qq:330409764</p>
+          <p class="copyright">欢迎！！</p>
+        </div>
+      </div>
+      
+    </aside>
+    <!--End 左侧导航-->
+    <!--  头  -->
+    <#include "../common/headerMenu.html">
+    
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-sm-6 col-lg-3">
+            <div class="card bg-primary">
+              <div class="card-body clearfix">
+                <div class="pull-right">
+                  <p class="h6 text-white m-t-0">备份文件数</p>
+                  <p class="h3 text-white m-b-0">${databaseBakTotal!"0"}个</p>
+                </div>
+                <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-arrow-down-bold  fa-1-5x"></i></span> </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-6 col-lg-3">
+            <div class="card bg-danger">
+              <div class="card-body clearfix">
+                <div class="pull-right">
+                  <p class="h6 text-white m-t-0">用户总数</p>
+                  <p class="h3 text-white m-b-0">${uerTotal!"0"}人</p>
+                </div>
+                <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-account fa-1-5x"></i></span> </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-6 col-lg-3">
+            <div class="card bg-success">
+              <div class="card-body clearfix">
+                <div class="pull-right">
+                  <p class="h6 text-white m-t-0">日志记录数</p>
+                  <p class="h3 text-white m-b-0">${operatoreLogTotal!"0"}个</p>
+                </div>
+                <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-pig select-icon fa-1-5x"></i></span> </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-6 col-lg-3">
+            <div class="card bg-purple">
+              <div class="card-body clearfix">
+                <div class="pull-right">
+                  <p class="h6 text-white m-t-0">当前在线人数</p>
+                  <p class="h3 text-white m-b-0">${onlineUserTotal!"0"}个</p>
+                </div>
+                <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i class="mdi mdi-comment-outline fa-1-5x"></i></span> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        
+        <div class="row">
+          
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>系统最近操作日志</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>操作人</th>
+                        <th>操作内容</th>
+                        <th>操作日期</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <#if operaterLogData??>
+                    <#list operaterLogData as operaterLog>
+                      <tr>
+                        <td>${operaterLog_index+1}</td>
+                        <td>${operaterLog.operator}</td>
+                        <td>${operaterLog.content}</td>
+                        <td>${operaterLog.createTime}</td>
+
+                      </tr>
+                    </#list>
+                    </#if>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+
+<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/admin/js/main.min.js"></script>
+
+<!--图表插件-->
+<script type="text/javascript" src="/admin/js/Chart.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/background?characterEncoding=utf-8&useSSL=false&useUnicode=true&serverTimezone=UTC
+    username: root
+    password: 12345
+    continue-on-error: false
+    dbcp2:
+      # 在连接归还到连接池时是否测试该连接
+      test-on-return: false
+      # 在连接归还到连接池时是否测试该连接
+      test-on-borrow: false
+      # 空闲连接回收的时间间隔，与test-while-idle一起使用，设置5分钟
+      time-between-eviction-runs-millis: 300000
+      # 连接池空闲连接的有效时间 ，设置30分钟
+      min-evictable-idle-time-millis: 1800000
+      initial-size: 5
+      max-wait-millis: 60000
+      min-idle: 5
+  # session的实效时间
+  session:
+    timeout: 1800
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  # springdatajpa配置
+  jpa:
+    show-sql: true
+    database: mysql
+    hibernate:
+      ddl-auto: update
+  # 数据库引擎类型
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+
+
+
+
+
+

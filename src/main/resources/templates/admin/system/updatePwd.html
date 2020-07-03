@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改信息</title>
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/js/jconfirm/jquery-confirm.min.css">
+   
+</head>
+<body data-theme="dark">
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <!--左侧导航-->
+        <aside class="lyear-layout-sidebar">
+            <!-- logo -->
+            <div id="logo" class="sidebar-header">
+
+                <a class="navbar-brand  " href="/system/index">橙子-后台管理</a>
+            </div>
+            <div class="lyear-layout-sidebar-scroll">
+
+                <#include "../common/leftMenu.html">
+
+                <div class="sidebar-footer">
+                    <p class="copyright">orange © 2020</p>
+                    <p class="copyright">qq:330409764</p>
+                    <p class="copyright">欢迎！！</p>
+                </div>
+            </div>
+
+        </aside>
+        <!--End 左侧导航-->
+        <!--  头  -->
+        <#include "../common/headerMenu.html">
+        <main class="lyear-layout-content">
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <form method="post" action="update_pwd" class="site-form" id="edit-pwd-form">
+                                    <div class="form-group">
+                                        <label for="old-password">旧密码</label>
+                                        <input type="password" class="form-control required" name="oldpwd" id="old-password" placeholder="输入账号的原登录密码" tips="请填写旧密码">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new-password">新密码</label>
+                                        <input type="password" class="form-control required" name="newpwd" id="new-password" placeholder="输入新的密码" tips="请填写新密码">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirm-password">确认新密码</label>
+                                        <input type="password" class="form-control required" name="confirmpwd" id="confirm-password" placeholder="请确认新密码" tips="请再次填写新密码">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="submit-btn">修改密码</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+</div>
+
+    <script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+    <#include "../common/icons.html">
+    <script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+    <!--标签插件-->
+    <script src="/admin/js/jquery-tags-input/jquery.tagsinput.min.js"></script>
+    <script type="text/javascript" src="/admin/js/main.min.js"></script>
+    <!--图表插件-->
+    <script type="text/javascript" src="/admin/js/Chart.js"></script>
+    <script type="text/javascript" src="/admin/js/common.js"></script>
+    <script src="/admin/js/jconfirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript" src="/admin/js/chosen.jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+            $("#submit-btn").click(function(){
+                if(!checkForm("edit-pwd-form")){
+                    return;
+                }
+                var oldPwd = $("#old-password").val();
+                var newPwd = $("#new-password").val();
+                var reNewPwd = $("#confirm-password").val();
+                if(newPwd != reNewPwd){
+                    showErrorMsg('两次密码输入不一致！');
+                    return;
+                }
+                //向后台发送请求
+                var data = {oldpwd:oldPwd,newpwd:newPwd};
+                ajaxRequest('/system/update_pwd','post',data,function(rst){
+                    showSuccess('密码修改成功！',function(){});
+                });
+            });
+    })
+
+
+
+</script>
+
+</body>
+</html>

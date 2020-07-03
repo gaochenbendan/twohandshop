@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>首页 - 橙子(Orange)后台管理系统</title>
+      <link rel="icon" href="/admin/images/tubiao.png" type="image/ico">
+    <meta name="keywords" content="橘子-后台管理系统项目">
+    <meta name="description" content="橘子-后台管理系统项目">
+    <meta name="author" content="orange">
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/js/jconfirm/jquery-confirm.min.css">
+
+  </head>
+
+  <body data-theme="dark">
+    <div class="lyear-layout-web">
+      <div class="lyear-layout-container">
+        <!--左侧导航-->
+        <aside class="lyear-layout-sidebar">
+
+          <!-- logo -->
+          <div id="logo" class="sidebar-header">
+              <a class="navbar-brand  " href="/system/index">橙子-后台管理</a>
+          </div>
+          <div class="lyear-layout-sidebar-scroll">
+
+            <#include "../common/leftMenu.html">
+
+            <div class="sidebar-footer">
+              <p class="copyright">orange © 2020</p>
+              <p class="copyright">qq:330409764</p>
+              <p class="copyright">欢迎！！</p>
+            </div>
+          </div>
+
+        </aside>
+        <!--End 左侧导航-->
+        <!--  头  -->
+        <#include "../common/headerMenu.html">
+
+        <!--页面主要内容-->
+
+        <main class="lyear-layout-content">
+
+          <div class="container-fluid">
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-toolbar clearfix">
+                    <form class="pull-right search-bar" method="get" action="/user/list" role="form">
+                      <div class="input-group">
+                        <div class="input-group-btn">
+
+                          <button class="btn btn-default dropdown-toggle" id="search-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                            用户名 <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li> <a tabindex="-1" href="javascript:void(0)" data-field="title">用户名</a> </li>
+
+                          </ul>
+                        </div>
+                        <input type="text" class="form-control" value="${netName!""}" name="netName" placeholder="请输入名称">
+                        <span class="input-group-btn">
+                          <button class="btn  btn-primary" type="submit">搜索</button>
+                        </span>
+                      </div>
+                    </form>
+                      <#if userThirdMenus??>
+                      <div class="toolbar-btn-action">
+                          <#list userThirdMenus as userThirdMenu>
+                          <#if userThirdMenu.button ==true>
+                          <a class="btn btn-primary m-r-5" href="javascript:void (0)" onclick="${userThirdMenu.url}"><i class="mdi ${userThirdMenu.icon}"></i> ${userThirdMenu.name}</a>
+                          <#else >
+                          <a class="btn btn-primary m-r-5" href="${userThirdMenu.url}" ><i class="mdi ${userThirdMenu.icon}"></i> ${userThirdMenu.name}</a>
+                          </#if >
+                     </#list >
+                    </div>
+                </#if >
+
+<!--                    <div class="toolbar-btn-action">-->
+<!--                      <a class="btn btn-primary m-r-5" href="/user/add"><i class="mdi mdi-plus"></i> 新增</a>-->
+<!--                      <a class="btn btn-primary m-r-5" href="javascript:edit()"><i class="mdi mdi-format-paint"></i> 编辑</a>-->
+<!--                      <a class="btn btn-primary m-r-5" href="javascript:del()"><i class="mdi mdi-delete"></i> 删除</a>-->
+
+<!--                    </div>-->
+                  </div>
+                  <div class="card-body">
+
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr >
+                            <th>
+                              <label class="lyear-checkbox checkbox-primary">
+                                <input type="checkbox" id="check-all"><span></span>
+                              </label>
+                            </th>
+
+                            <th align="center">网名</th>
+                            <th align="center">角色名</th>
+                            <th align="center">角色</th>
+                            <th align="center">状态</th>
+                            <th align="center">性别</th>
+                            <th align="center">手机</th>
+                            <th align="center">邮箱</th>
+                            <th align="center">添加时间</th>
+
+
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                        <#if pageBean.content?size gt 0>
+                        <#list pageBean.content as user>
+                        <tr >
+                          <td style="vertical-align:middle;">
+                            <label class="lyear-checkbox checkbox-primary">
+                              <input type="checkbox" name="ids[]" value="${user.id}"><span></span>
+                            </label>
+                          </td>
+                          <td style="vertical-align:middle;">
+<!--                            <#if user.headPic??>-->
+<!--                            <#if user.headPic?length gt 0>-->
+<!--                            <img src="/photo/view?filename=${user.headPic}"  width="60px" height="60px">-->
+<!--                            <#else>-->
+<!--                            <img src="/admin/images/bj.jpg" width="60px" height="60px">-->
+<!--                          </#if>-->
+<!--                        </#if>-->
+                            ${user.netName}
+                        </td>
+                        <td style="vertical-align:middle;">${user.userName}</td>
+                        <td style="vertical-align:middle;">${user.role.name}</td>
+                        <td style="vertical-align:middle;">
+                          <#if user.status == 1>
+                          <font class="text-success">正常</font>
+                          <#else>
+                          <font class="text-warning">冻结</font>
+                        </#if>
+                        </td>
+                        <td style="vertical-align:middle;">
+                          <#if user.sex == 1>
+                          <font class="text-success">男</font>
+                          <#elseif user.sex == 2>
+                          <font class="text-info">女</font>
+                          <#else>
+                          <font class="text-warning">未知</font>
+                        </#if>
+                        </td>
+                        <td style="vertical-align:middle;" >${user.phone!""}</td>
+                        <td style="vertical-align:middle;" >${user.email!""}</td>
+                        <td style="vertical-align:middle;" style="vertical-align:middle;"><font class="text-success">${user.creatTime}</font></td>
+                        </tr>
+                        </#list>
+                        <#else>
+                        <tr align="center"><td colspan="9">这里空空如也！</td></tr>
+                      </#if>
+                        </tbody>
+                      </table>
+                    </div>
+                  <#if pageBean.total gt 0>
+                  <ul class="pagination">
+                    <#if pageBean.currentPage == 1>
+                    <li class="disabled"><span>«</span></li>
+                    <#else>
+                    <li><a href="list?username=${username!""}&currentPage=1">«</a></li>
+                  </#if>
+                  <#list pageBean.currentShowPage as showPage>
+                  <#if pageBean.currentPage == showPage>
+                  <li class="active"><span>${showPage}</span></li>
+                  <#else>
+                  <li><a href="list?username=${username!""}&currentPage=${showPage}">${showPage}</a></li>
+                </#if>
+              </#list>
+              <#if pageBean.currentPage == pageBean.totalPage>
+              <li class="disabled"><span>»</span></li>
+              <#else>
+              <li><a href="list?username=${username!""}&currentPage=${pageBean.totalPage}">»</a></li>
+            </#if>
+            <li><span>共${pageBean.totalPage}页,${pageBean.total}条数据</span></li>
+            </ul>
+          </#if>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </main>
+
+        <!--End 页面主要内容-->
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="/admin/js/main.min.js"></script>
+    <script type="text/javascript" src="/admin/js/common.js"></script>
+
+    <!--图表插件-->
+    <script src="/admin/js/jconfirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript" src="/admin/js/Chart.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('.search-bar .dropdown-menu a').click(function() {
+          var field = $(this).data('field') || '';
+          $('#search-field').val(field);
+          $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+        });
+      });
+      function del(url){
+        if($("input[type='checkbox']:checked").length !== 1){
+            showWarinMsg('请选择一条数据进行删除！');
+          return;
+        }
+        var id = $("input[type='checkbox']:checked").val();
+
+        $.confirm({
+          title: '确定删除？',
+          content: '删除后数据不可恢复，请慎重！',
+          buttons: {
+            confirm: {
+              text: '确认',
+              action: function(){
+                deleteReq(id,url);
+              }
+            },
+            cancel: {
+              text: '关闭',
+              action: function(){
+
+              }
+            }
+          }
+        });
+      };
+      function edit(url){
+          if($("input[type='checkbox']:checked").length !== 1){
+              showWarinMsg('请选择一条数据进行编辑！');
+              return;
+          }
+          window.location.href =url + '?id=' + $("input[type='checkbox']:checked").val();
+      };
+      function deleteReq(id,url){
+        $.ajax({
+          url:url,
+          type:'POST',
+          data:{id:id},
+          dataType:'json',
+          success:function(data){
+            if(data.code == 0){
+                showSuccess('角色删除成功!',function(){
+                $("input[type='checkbox']:checked").parents("tr").remove();
+              });
+              window.location.href = 'list';
+            }else{
+              showErrorMsg(data.msg);
+            }
+          },
+          error:function(data){
+
+            alert('网络错误!');
+          }
+        });
+      };
+
+
+
+
+    </script>
+  </body>
+</html>

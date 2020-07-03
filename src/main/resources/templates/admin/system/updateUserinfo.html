@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改信息</title>
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/admin/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/js/jconfirm/jquery-confirm.min.css">
+   
+</head>
+<body data-theme="dark">
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <!--左侧导航-->
+        <aside class="lyear-layout-sidebar">
+            <!-- logo -->
+            <div id="logo" class="sidebar-header">
+
+                <a class="navbar-brand  " href="/system/index">橙子-后台管理</a>
+            </div>
+            <div class="lyear-layout-sidebar-scroll">
+
+                <#include "../common/leftMenu.html">
+
+                <div class="sidebar-footer">
+                    <p class="copyright">orange © 2020</p>
+                    <p class="copyright">qq:330409764</p>
+                    <p class="copyright">欢迎！！</p>
+                </div>
+            </div>
+
+        </aside>
+        <!--End 左侧导航-->
+        <!--  头  -->
+        <#include "../common/headerMenu.html">
+        <main class="lyear-layout-content">
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="edit-avatar">
+
+                                    <#if user.headPic??>
+                                    <#if user.headPic?length gt 0>
+                                    <img class="img-avatar img-avatar-48 m-r-10"  id="show-picture-img" src="/photo/view?filename=${user.headPic}" alt="${user.username!""}" />
+                                    <#else>
+                                    <img class="img-avatar img-avatar-48 m-r-10" id="show-picture-img" src="/admin/images/default-head.jpg" alt="${user.username!""}" />
+                                </#if>
+                            </#if>
+                                    <input type="file" id="select-file" style="display:none;" onchange="upload('show-picture-img','headPic')">
+                                    <div class="avatar-divider"></div>
+                                    <div class="edit-avatar-content">
+                                        <button class="btn btn-default" id="add-pic-btn">修改头像</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <form method="post" action="#" class="site-form" id="user-add-form">
+                                    <input type="hidden" name="headPic" id="headPic" value="${user.headPic!""}">
+                                    <div class="form-group">
+                                        <label for="userName">用户名</label>
+                                        <input type="text" class="form-control" name="userName" id="userName" value="${user.userName}" disabled="disabled" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="netName">网名</label>
+                                        <input type="text" class="form-control" name="netName" id="netName"
+                                               placeholder="输入您的网名" value="${user.netName}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">手机</label>
+                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="输入您的手机号码" value="${user.phone!""}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">邮箱</label>
+                                        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="请输入正确的邮箱地址" value="${user.email!""}">
+                                        <small id="emailHelp" class="form-text text-muted">请保证您填写的邮箱地址是正确的。</small>
+                                    </div>
+                                    <div class="input-group m-b-10" style="margin-top: 15px;padding-left: 20px" >
+                                        状态：
+                                        <label class="lyear-radio radio-inline radio-primary">
+                                            <input type="radio" name="sex" value="1" checked="" <#if user.sex == 1>checked</#if>>
+                                        <span>男 </span>
+                                        </label>
+                                        <label class="lyear-radio radio-inline radio-primary" >
+                                            <input type="radio" name="sex" value="2" <#if user.sex == 2>checked</#if> >
+                                        <span>女</span>
+                                        </label>
+                                        <label class="lyear-radio radio-inline radio-primary" >
+                                            <input type="radio" name="sex" value="3" <#if user.sex == 3>checked</#if> >
+                                        <span>未知</span>
+                                        </label>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary" id="add-form-submit-btn">保存</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+</div>
+
+    <script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+    <#include "../common/icons.html">
+    <script type="text/javascript" src="/admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/admin/js/perfect-scrollbar.min.js"></script>
+    <!--标签插件-->
+    <script src="/admin/js/jquery-tags-input/jquery.tagsinput.min.js"></script>
+    <script type="text/javascript" src="/admin/js/main.min.js"></script>
+    <!--图表插件-->
+    <script type="text/javascript" src="/admin/js/Chart.js"></script>
+    <script type="text/javascript" src="/admin/js/common.js"></script>
+    <script src="/admin/js/jconfirm/jquery-confirm.min.js"></script>
+    <script type="text/javascript" src="/admin/js/chosen.jquery.min.js"></script>
+<script type="text/javascript">
+    $("#add-pic-btn").click(function () {
+        $("#select-file").click();
+    });
+
+</script>
+
+</body>
+</html>

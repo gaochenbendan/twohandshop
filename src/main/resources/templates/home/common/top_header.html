@@ -1,0 +1,77 @@
+<style>
+    .loginandrigist {
+        margin-left: 1000px;
+        margin-top: -66px;
+    }
+
+    #person_info {
+        height: 100%;
+        cursor: pointer;
+        position: relative;
+    }
+    .clearfix {
+        zoom: 1;
+    }
+</style>
+<header class="ease2">
+    <a href="/home/index/index">
+        <img class="logo ease2" src="/home/imgs/orange.png" alt="橙子图标">
+    </a>
+    <div class="header-main center ease2">
+        <a href="/home/index/index" class="slogan">
+            <h1 class="s-main"></h1>
+            <div class="s-submain"></div>
+            <img src="/home/imgs/orange2.png" style="top: -16px;left: -24px;width: 265px;height: 107px" alt="橙子二手物品交易平台">
+        </a>
+        <div class="search-box-wr ease2">
+            <div class="search-box center" >
+                <button  class="search-submit" id="search-button" onclick="searchPro()">搜索</button>
+                <div class="input-wr">
+                    <img class="search-icon" src="/home/imgs/search-icon.png">
+                    <div class="search-input">
+                        <input name="keyword" id="keyword" x-webkit-speech="" placeholder="搜索你想要的商品" value="" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-hots center ease2">
+                <span>热门：</span>
+                <a class="hots" href="/product_list.jsp?cat=101" target="_top">手机</a>
+                <a class="hots" href="/product_list.jsp?cat=201" target="_top">笔记本</a>
+                <a class="hots" href="/product_list.jsp?cat=701" target="_top">乐器</a>
+                <a class="hots" href="/product_list.jsp?cat=8" target="_top">图书</a>
+            </div>
+        </div>
+<!--        <%&#45;&#45; <input   type="text" value=""> &#45;&#45;%>-->
+        <div class="ease2 log-reg" id="have-not-login" style="padding-right: 50px">
+            <#if CustomerL??>
+            <div id="have_login" class="clearfix">
+                <div id="person_info" class="clearfix">
+                    <a href="/home/customer/index">
+                        <#if CustomerL.headPic??>
+                        <img  class="avatar "  style="height:48px;width:48px;" src="/photo/view_cunstomer?filename=${CustomerL.headPic}">
+                        <#else>
+                        <img  class="avatar"  style="height:48px;width:48px;" src="/home/imgs/avatar4.png">
+                    </#if>
+                    </a>
+                    <div  style="display:inline;border-bottom: 50px"  class="person_name " >
+                        <a href="/home/customer/index" id="id-btn" style="font-size:14px">Hi：${CustomerL.nickname!CustomerL.sn}</a>
+                    </div>
+                    <div  style="display:inline;"  class="person_name">
+                        <a href="/home/index/logout" id="log-btn" style="font-size: 14px">&nbsp;&nbsp;<b>退出</b></a>
+                    </div>
+                </div>
+            </div>
+            <#else>
+            <!-- loginandrigist -->
+            <div class="button" ><a href="../index/login" style="font-size: 12px;text-decoration: none">登录/注册</a></div>
+        </#if>
+    </div>
+    </div>
+</header>
+<script type="text/javascript">
+    function searchPro(){
+        var keyword=$("#keyword").val()
+        window.location.href="product_list.jsp?keyword="+keyword;
+    }
+</script>

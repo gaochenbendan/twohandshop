@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: dev
+
+# 视图监听器
+  freemarker:
+    suffix: .html
+#  网页路径
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
+  webflux:
+#  静态资源路径
+    static-path-pattern: classpath:/static/admin/**
+
+server:
+  port: 8086
+
+orange:
+  upload:
+    photo:
+      sufix: .jpg,.png,.gif,jpeg
+      maxsize: 1024
+      upload_path: D:\projectdev\image\upload\images
+      upload_path_icon: D:\projectdev\image\upload\icon
+      upload_path_customer: D:\projectdev\image\upload\customer
+      data_bak_path: D:\projectdev\bac\
+      username: root
+      password: 12345
+      database: background
+
+
+
+
+
+
+

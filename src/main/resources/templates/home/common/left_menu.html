@@ -1,0 +1,45 @@
+<nav class="ease2">
+    <ul>
+        <li class="blank-head">
+            <a href="javascript:;"></a>
+        </li>
+
+        <li class="category-12 catg">
+            <a href="/product_list.jsp?cat=0" target="_top">
+                <i class="nav-icons">
+                    <img src="/home/imgs/12.png" alt="全部商品"></i>
+                <h3>全部商品</h3>
+            </a>
+        </li>
+
+        <#if goodsCategorys??>
+        <#list goodsCategorys as goodsCategory>
+        <#if goodsCategory.parent??>
+        <#else>
+        <li class="category-2 catg">
+
+            <a href="/product_list.jsp?cat=1" target="_top">
+                <i class="nav-icons">
+                    <img src="/photo/view_icon?filename=${goodsCategory.icon}" alt="${goodsCategory.name}"></i>
+                <h3>${goodsCategory.name}</h3>
+            </a>
+            </#if>
+            <div class="sub-nav">
+                <span>
+                    <#list goodsCategorys as gc>
+                    <#if gc.parent??>
+                    <#if gc.parent.id == goodsCategory.id>
+                    <a href="/product_list.jsp?cat=101" target="_top">${gc.name!""}</a>
+                    </#if>
+                    </#if>
+                    </#list>
+                </span>
+            </div>
+        </li>
+
+        </#list>
+        </#if>
+
+
+    </ul>
+</nav>

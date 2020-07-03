@@ -1,0 +1,11 @@
+<#if userThirdMenus??>
+<div class="toolbar-btn-action">
+    <#list userThirdMenus as userThirdMenu>
+<#if userThirdMenu.button ==true>
+<a class="btn btn-primary m-r-5" href="javascript:void (0)" onclick="${userThirdMenu.url}"><i class="mdi ${userThirdMenu.icon}"></i> ${userThirdMenu.name}</a>
+<#else >
+<a class="btn btn-primary m-r-5" href="${userThirdMenu.url}" ><i class="mdi ${userThirdMenu.icon}"></i> ${userThirdMenu.name}</a>
+</#if >
+</#list >
+</div>
+</#if >
